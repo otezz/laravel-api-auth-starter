@@ -37,4 +37,18 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    /**
+     * Indicate that the user is suspended.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function suspended()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'suspended_at' => now(),
+            ];
+        });
+    }
 }
