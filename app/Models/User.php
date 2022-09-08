@@ -22,6 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
     protected $fillable = [
         'name',
         'email',
+        'email_verified_at',
         'password',
     ];
 
@@ -55,13 +56,21 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
     ];
 
     /**
+     * Get the social authentication provider for the user.
+     */
+    public function socialProviders()
+    {
+        return $this->hasMany(UserSocial::class);
+    }
+
+    /**
      * Get the user's email verification status.
      *
      * @return bool
      */
     public function getIsEmailVerifiedAttribute(): bool
     {
-        return $this->email_verified_at != null;
+        return $this->hasVerifiedEmail();
     }
 
     /**

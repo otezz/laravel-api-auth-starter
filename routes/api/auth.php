@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Auth\VerificationController;
 use Illuminate\Support\Facades\Route;
 
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 |
 | Here is where you can register API routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
+| is assigned the "api" middleware group. Enjoy building your API!co
 |
 */
 
@@ -25,3 +26,8 @@ Route::post('/verify/resend', [VerificationController::class, 'resend'])->middle
 Route::post('/password/email', [AuthController::class, 'sendResetPasswordEmail'])->middleware('guest')->name('password.email');
 Route::get('/password/reset/{token}', [AuthController::class, 'checkResetToken'])->middleware('guest')->name('password.reset');
 Route::post('/password/reset', [AuthController::class, 'updatePassword'])->middleware('guest')->name('password.update');
+
+// Social auth routes
+Route::post('/social', [SocialAuthController::class, 'handleToken']);
+Route::get('/social/redirect/{provider}', [SocialAuthController::class, 'handleRedirect']);
+Route::get('/social/callback/{provider}', [SocialAuthController::class, 'handleCallback']);
