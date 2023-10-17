@@ -32,7 +32,7 @@ jobs:
         run: chmod -R 777 storage bootstrap/cache
 
       - name: Execute tests (Unit and Feature tests)
-        run: ./vendor/bin/phpunit -v --stderr --coverage-clover=coverage.xml
+        run: ./vendor/bin/phpunit --stderr --coverage-clover=coverage.xml
 
       - name: Upload coverage report to codecov
         uses: codecov/codecov-action@v3
